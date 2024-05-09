@@ -1,0 +1,152 @@
+[
+  {
+    "food_name": "Pizza Margherita",
+    "food_image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UGl6emElMjBNYXJnaGVyaXRhfGVufDB8MHwwfHx8MA%3D%3D",
+    "food_category": "Italian Cuisine",
+    "quantity": 20,
+    "price": 10.99,
+    "added_by": "Chef Giovanni",
+    "food_origin": "Italy",
+    "description": "Pizza Margherita is a classic Italian pizza topped with tomato, mozzarella cheese, fresh basil leaves, salt, and extra-virgin olive oil. The dough is made from flour, water, yeast, salt, and a little sugar, kneaded until smooth and then left to rise. It's then rolled out, topped with tomato sauce, sliced mozzarella, and torn basil leaves, and baked in a hot oven until the crust is golden brown and the cheese is bubbling."
+  },
+  {
+    "food_name": "Sushi",
+    "food_image": "https://plus.unsplash.com/premium_photo-1668146927669-f2edf6e86f6f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8U3VzaGl8ZW58MHwwfDB8fHww",
+    "food_category": "Japanese Cuisine",
+    "quantity": 10,
+    "price": 12.5,
+    "added_by": "Sushi Chef Hiroshi",
+    "food_origin": "Japan",
+    "description": "Sushi is a traditional Japanese dish consisting of vinegared rice combined with various ingredients such as raw or cooked seafood, vegetables, and occasionally tropical fruits. It is often served with pickled ginger, wasabi, and soy sauce. The rice is seasoned with a mixture of rice vinegar, sugar, and salt, then formed into bite-sized pieces and topped or filled with a variety of ingredients such as tuna, salmon, cucumber, avocado, or shrimp."
+  },
+  {
+    "food_name": "Hamburger",
+    "food_image": "https://images.unsplash.com/photo-1550317138-10000687a72b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8SGFtYnVyZ2VyfGVufDB8MHwwfHx8MA%3D%3D",
+    "food_category": "American Cuisine",
+    "quantity": 30,
+    "price": 8.99,
+    "added_by": "Chef Sarah",
+    "food_origin": "United States",
+    "description": "A hamburger is a sandwich consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced hamburger bun. The patty may be pan-fried, grilled, or flame-broiled. It is often served with various toppings such as lettuce, tomato, onion, pickles, cheese, bacon, and condiments like ketchup, mustard, and mayonnaise."
+  },
+  {
+    "food_name": "Pad Thai",
+    "food_image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UGFkJTIwVGhhaXxlbnwwfDB8MHx8fDA%3D",
+    "food_category": "Thai Cuisine",
+    "quantity": 23,
+    "price": 9.75,
+    "added_by": "Chef Thanya",
+    "food_origin": "Thailand",
+    "description": "Pad Thai is a popular Thai stir-fried noodle dish made with rice noodles, eggs, tofu, shrimp, or chicken, bean sprouts, peanuts, and a flavorful sauce made from tamarind paste, fish sauce, sugar, and chili. The dish is typically garnished with lime wedges, chopped peanuts, and cilantro. It's both sweet and savory with a hint of tanginess from the tamarind."
+  },
+  {
+    "food_name": "Croissant",
+    "food_image": "https://plus.unsplash.com/premium_photo-1670333242784-46b220ef90a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fENyb2lzc2FudHxlbnwwfDB8MHx8fDA%3D",
+    "food_category": "French Cuisine",
+    "quantity": 40,
+    "price": 3.5,
+    "added_by": "Baker Pierre",
+    "food_origin": "France",
+    "description": "A croissant is a buttery, flaky, viennoiserie pastry named for its crescent shape. It is made of a layered yeast-leavened dough enriched with butter, which gives it a rich and moist texture. The dough is rolled and folded several times, then shaped into crescents and baked until golden brown. Croissants are often enjoyed plain or filled with sweet or savory fillings such as chocolate, almond paste, or ham and cheese."
+  },
+  {
+    "food_name": "Peking Duck",
+    "food_image": "https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVraW5nJTIwZHVja3xlbnwwfDB8MHx8fDA%3D",
+    "food_category": "Chinese Cuisine",
+    "quantity": 20,
+    "price": 24.99,
+    "added_by": "Chef Li",
+    "food_origin": "China",
+    "description": "Peking Duck is a famous Chinese dish known for its crispy skin and tender meat. The duck is traditionally prepared by air-drying the skin, then roasting it in a closed oven until the skin becomes crispy and golden brown. It's served with thin pancakes, hoisin sauce, sliced scallions, and cucumber, which are used to wrap the duck meat before eating."
+  },
+  {
+    "food_name": "Paella",
+    "food_image": "https://images.unsplash.com/photo-1630175914039-69ffca8a0604?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fFBhZWxsYXxlbnwwfDB8MHx8fDA%3D",
+    "food_category": "Spanish Cuisine",
+    "quantity": 28,
+    "price": 16.5,
+    "added_by": "Chef Miguel",
+    "food_origin": "Spain",
+    "description": "Paella is a traditional Spanish rice dish originating from the Valencia region. It's typically made with short-grain rice, saffron, vegetables, and a variety of meats such as chicken, rabbit, and seafood like shrimp, mussels, and clams. The dish is cooked in a wide, shallow pan called a paellera, which allows for the rice to develop a crispy crust known as socarrat. Paella is often flavored with paprika, garlic, and rosemary, and is served hot with lemon wedges."
+  },
+  {
+    "food_name": "Goulash",
+    "food_image": "https://images.unsplash.com/photo-1528451635828-f28cd48439a7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHN0ZXd8ZW58MHwwfDB8fHww",
+    "food_category": "Hungarian Cuisine",
+    "quantity": 39,
+    "price": 12.75,
+    "added_by": "Chef Istvan",
+    "food_origin": "Hungary",
+    "description": "Goulash is a hearty Hungarian stew made with tender chunks of beef, onions, peppers, tomatoes, and paprika. It's seasoned with garlic, caraway seeds, and bay leaves, and slow-cooked until the meat is tender and the flavors meld together. Goulash is often served with a side of bread, dumplings, or noodles, and is a comforting and satisfying dish, especially during the colder months."
+  },
+  {
+    "food_name": "Ramen",
+    "food_image": "https://images.unsplash.com/photo-1618889482923-38250401a84e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UmFtZW58ZW58MHwwfDB8fHww",
+    "food_category": "Japanese Cuisine",
+    "quantity": 64,
+    "price": 11.25,
+    "added_by": "Chef Yuki",
+    "food_origin": "Japan",
+    "description": "Ramen is a Japanese noodle soup consisting of wheat noodles served in a meat or fish-based broth, often flavored with soy sauce or miso, and toppings such as sliced pork (chashu), boiled eggs, seaweed (nori), bamboo shoots, and green onions. The noodles are typically made from wheat flour, water, salt, and kansui (alkaline mineral water), giving them a chewy texture. Ramen comes in various regional styles across Japan, each with its unique broth and toppings."
+  },
+  {
+    "food_name": "Tiramisu",
+    "food_image": "https://images.unsplash.com/photo-1607755271353-d740f1c302f5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFRpcmFtaXN1fGVufDB8MHwwfHx8MA%3D%3D",
+    "food_category": "Italian Cuisine",
+    "quantity": 56,
+    "price": 7.99,
+    "added_by": "Chef Sofia",
+    "food_origin": "Italy",
+    "description": "Tiramisu is a classic Italian dessert made with layers of coffee-soaked ladyfinger biscuits, mascarpone cheese, cocoa powder, and sometimes a hint of liqueur such as Marsala wine or rum. The name 'tiramisu' translates to 'pick me up' or 'cheer me up,' referring to the energizing combination of coffee and rich flavors. The dessert is assembled by dipping the ladyfingers in coffee, layering them with the creamy mascarpone mixture, and dusting with cocoa powder. It's chilled before serving, allowing the flavors to meld together and create a decadent and indulgent treat."
+  },
+  {
+    "food_name": "Sashimi",
+    "food_image": "https://images.unsplash.com/photo-1501595091296-3aa970afb3ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFNhc2hpbWl8ZW58MHwwfDB8fHww",
+    "food_category": "Japanese Cuisine",
+    "quantity": 49,
+    "price": 18.99,
+    "added_by": "Chef Aiko",
+    "food_origin": "Japan",
+    "description": "Sashimi is a traditional Japanese delicacy consisting of thinly sliced raw fish or seafood served without rice. It's often presented on a bed of daikon radish or shiso leaves and accompanied by soy sauce, wasabi, and pickled ginger. The choice of fish can vary, including tuna, salmon, yellowtail, and mackerel, among others. Sashimi highlights the natural flavors and textures of the fresh fish and is prized for its simplicity and purity."
+  },
+  {
+    "food_name": "Croque Monsieur",
+    "food_image": "https://media.istockphoto.com/id/1392291733/photo/homemade-croque-madame-hot-french-sandwich-with-ham-cheese-and-toasted-bread-topped-with.webp?b=1&s=170667a&w=0&k=20&c=2O0JC8cMgWstGlZnGu6HoZX1GDbUu9usAJPt0IRfpDY=",
+    "food_category": "French Cuisine",
+    "quantity": 20,
+    "price": 9.75,
+    "added_by": "Chef Jacques",
+    "food_origin": "France",
+    "description": "Croque Monsieur is a classic French sandwich made with sliced ham, Gruyère cheese, and béchamel sauce, layered between slices of crusty bread. The sandwich is then topped with more grated cheese and baked or broiled until the cheese is melted and bubbly. It's a rich and indulgent dish, often served as a quick lunch or snack in cafes throughout France."
+  },
+  {
+    "food_name": "Kimchi Fried Rice",
+    "food_image": "https://media.istockphoto.com/id/1401456168/photo/korean-kimchi-fried-rice-with-boiled-egg-on-wooden-table.webp?b=1&s=170667a&w=0&k=20&c=aK-GFDZslFi3ER50dCJyM4f009Acmg1qPF_U30Abf-Q=",
+    "food_category": "Korean Cuisine",
+    "quantity": 50,
+    "price": 10.5,
+    "added_by": "Chef Ji-Yoon",
+    "food_origin": "Korea",
+    "description": "Kimchi Fried Rice is a popular Korean dish made by stir-frying cooked rice with kimchi, vegetables, and often meat or seafood. The kimchi adds a tangy and spicy flavor to the rice, while the vegetables provide texture and color. It's often seasoned with soy sauce, sesame oil, and gochujang (Korean chili paste), and garnished with sliced green onions and toasted sesame seeds. Kimchi Fried Rice is a satisfying and flavorful one-dish meal."
+  },
+  {
+    "food_name": "Moules Marinière",
+    "food_image": "https://media.istockphoto.com/id/484168602/photo/moules-mariniere-with-french-fries.webp?b=1&s=170667a&w=0&k=20&c=qhfHjv6C0SzWHeCkQ8LHGUXWp3FBzIwDk0GjC0ieEbc=",
+    "food_category": "French Cuisine",
+    "quantity": 18,
+    "price": 14.25,
+    "added_by": "Chef Élodie",
+    "food_origin": "France",
+    "description": "Moules Marinière is a classic French dish of mussels cooked in a flavorful broth of white wine, shallots, garlic, parsley, and sometimes cream. The mussels are steamed until they open and absorb the aromatic flavors of the broth. It's often served with crusty bread for soaking up the delicious juices and accompanied by fries or a salad. Moules Marinière is a beloved dish in coastal regions of France and is enjoyed as a casual yet elegant meal."
+  },
+  {
+    "food_name": "Chimichurri Steak",
+    "food_image": "https://images.unsplash.com/photo-1569229490681-4085b3f54ba3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2hpbWljaHVycmklMjBTdGVha3xlbnwwfDB8MHx8fDA%3D",
+    "food_category": "Argentinian Cuisine",
+    "quantity": 20,
+    "price": 22.99,
+    "added_by": "Chef Diego",
+    "food_origin": "Argentina",
+    "description": "Chimichurri Steak is a traditional Argentinian dish featuring grilled steak topped with chimichurri sauce. Chimichurri is a vibrant and herbaceous sauce made with fresh parsley, garlic, oregano, vinegar, olive oil, and red pepper flakes. The steak is grilled to perfection, then generously slathered with the chimichurri sauce, imparting bold and zesty flavors. It's often served with grilled vegetables and roasted potatoes, making for a hearty and satisfying meal."
+  }
+]
