@@ -10,8 +10,24 @@ import Container from "@mui/material/Container";
 
 import { Link } from "react-router-dom";
 import TitleForPages from "../components/common/TitleForPages";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../util/firebase.config";
 
 export default function SignUp() {
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const photo = e.target.photo.value;
+    const password = e.target.password.value;
+    console.log(name, email, photo, password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        console.log("success!");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <TitleForPages PageTitle="Sign Up" />
@@ -31,7 +47,12 @@ export default function SignUp() {
               alignItems: "center",
             }}
           >
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={handleSignUp}
+              noValidate
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -39,7 +60,6 @@ export default function SignUp() {
                 id="name"
                 label="Your Name"
                 name="name"
-                autoComplete="name"
                 type="text"
                 autoFocus
                 sx={{
@@ -54,7 +74,7 @@ export default function SignUp() {
                   },
 
                   "&.Mui-focused fieldset": {
-                    borderColor: "green", // Change border color when focused
+                    borderColor: "green",
                   },
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -113,7 +133,6 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 type="email"
                 sx={{
                   "& input": {
@@ -151,7 +170,6 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
                 sx={{
                   "& input": {
                     color: "#F5B57D",

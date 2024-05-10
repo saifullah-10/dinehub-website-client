@@ -10,8 +10,49 @@ import Container from "@mui/material/Container";
 
 import { Link } from "react-router-dom";
 import TitleForPages from "../components/common/TitleForPages";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import auth from "../util/firebase.config";
 
 export default function SignIn() {
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        console.log(" sign In Success");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // google login
+  const googleProvider = new GoogleAuthProvider();
+
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+      .then(() => {
+        console.log(" login successful");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // github login
+  const githubProvider = new GithubAuthProvider();
+  const handleGithubLogin = () => {
+    signInWithPopup(auth, githubProvider)
+      .then(() => {
+        console.log("login success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <TitleForPages PageTitle="Sign In" />
@@ -31,7 +72,12 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={handleSignIn}
+              noValidate
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -117,6 +163,7 @@ export default function SignIn() {
               </Typography>
 
               <Button
+                onClick={handleGoogleLogin}
                 fullWidth
                 variant="contained"
                 sx={{
@@ -138,6 +185,7 @@ export default function SignIn() {
               </Button>
 
               <Button
+                onClick={handleGithubLogin}
                 fullWidth
                 variant="contained"
                 sx={{
