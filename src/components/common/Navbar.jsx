@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { LuMenu } from "react-icons/lu";
-
+import SiteLogo from "../../assets/common/res-logo.png";
 import { Link, NavLink } from "react-router-dom";
 import ModalClose from "@mui/joy/ModalClose";
 
@@ -69,14 +69,7 @@ export default function Navbar(props) {
                 href="https://flowbite.com/"
                 className="flex items-center space-x-3 rtl:space-x-reverse"
               >
-                <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-8"
-                  alt="Flowbite Logo"
-                />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                  Flowbite
-                </span>
+                <img src={SiteLogo} className="h-8" alt="Flowbite Logo" />
               </a>
 
               <div

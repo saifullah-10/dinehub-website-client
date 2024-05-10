@@ -1,5 +1,3 @@
-import { Divider } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -10,38 +8,13 @@ import { FaGithub } from "react-icons/fa";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import CommonImg from "../assets/common/design.png";
 import { Link } from "react-router-dom";
+import TitleForPages from "../components/common/TitleForPages";
 
 export default function SignIn() {
   return (
     <div>
-      <div
-        className=" lg:h-[250px] h-[200px]"
-        style={{
-          backgroundImage: `url(${CommonImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-
-          width: "100%",
-          transform: "translateY(-7%)",
-        }}
-      >
-        <div className=" py-10 flex flex-col items-center">
-          <h1 className=" text-[2rem] lg:text-[3rem] text-[#ffd] text-center ">
-            Sign In
-          </h1>
-          <Divider
-            sx={{
-              width: "200px",
-              height: "5px",
-              background: "#F28B30",
-              borderRadius: "10px",
-            }}
-          />
-        </div>
-      </div>
+      <TitleForPages PageTitle="Sign In" />
       <div>
         {/* form */}
 
