@@ -7,6 +7,8 @@ import SignUp from "../pages/SignUp";
 import Purchase from "../pages/Purchase";
 import AllFoods from "../pages/AllFoods";
 
+import SingleFood from "../pages/SingleFood";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/allfoods",
         element: <AllFoods />,
+      },
+      {
+        path: "/fooddetails/:id",
+        element: <SingleFood />,
       },
       {
         path: "/signin",
