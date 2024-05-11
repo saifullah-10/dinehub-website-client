@@ -22,9 +22,9 @@ export default function Home() {
   return (
     <>
       {/* hero */}
-      <section className=" ">
+      <section className=" lg:py-20 ">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto gap-7 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-          <div className="mr-auto place-self-center lg:col-span-7">
+          <div className=" place-self-center lg:col-span-7 flex flex-col  items-center">
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none text-center lg:text-left md:text-5xl xl:text-6xl text-white">
               Welcome To <span className="text-[#FF6347]"> DineHub</span>
             </h1>
@@ -68,6 +68,13 @@ export default function Home() {
           {data?.map((data) => (
             <FoodCards key={data._id} data={data} />
           ))}
+        </div>
+        <div className=" flex justify-center mt-5">
+          <Link to={"/allfoods"}>
+            <button className=" px-4 py-2 bg-[#F97942] hover:text-gray-300 font-medium text-white rounded-lg">
+              See All ....
+            </button>
+          </Link>
         </div>
       </div>
       {/* top selling */}

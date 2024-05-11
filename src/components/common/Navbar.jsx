@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -19,10 +19,11 @@ import {
 import PropTypes from "prop-types";
 import { LuMenu } from "react-icons/lu";
 import SiteLogo from "../../assets/common/res-logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ModalClose from "@mui/joy/ModalClose";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { Context } from "../../context/ContextProvide";
+import { signOut } from "firebase/auth";
+import auth from "../../util/firebase.config";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -45,11 +46,11 @@ HideOnScroll.propTypes = {
 };
 
 export default function Navbar(props) {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(Context);
   const [open, setOpen] = useState(false);
   // const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const user = false;
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -58,6 +59,18 @@ export default function Navbar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+        setUser(null);
+        console.log("User logged out");
+      })
+      .catch((err) => {
+        console.log("something went wrong", err);
+      });
+  };
   return (
     <>
       <CssBaseline />
@@ -65,10 +78,7 @@ export default function Navbar(props) {
         <div>
           <nav className="bg-[#1B1B1B] border-gray-200 ">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-              <a
-                href="https://flowbite.com/"
-                className="flex items-center space-x-3 rtl:space-x-reverse"
-              >
+              <a className="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src={SiteLogo} className="h-8" alt="Flowbite Logo" />
               </a>
 
@@ -172,17 +182,20 @@ export default function Navbar(props) {
                       open={Boolean(anchorElUser)}
                       onClose={handleCloseUserMenu}
                     >
-                      {settings.map((setting) => (
-                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center">{setting}</Typography>
-                        </MenuItem>
-                      ))}
+                      <MenuItem
+                        onClick={() => {
+                          handleCloseUserMenu();
+                          handleLogout();
+                        }}
+                      >
+                        <Typography textAlign="center">Logout</Typography>
+                      </MenuItem>
                     </Menu>
                   </Box>
                 </div>
                 {/* profile */}
                 {/* responsive menu */}
-                <div className=" lg:hidden">
+                <div className=" lg:hidden md:hidden">
                   <Box sx={{ display: { xs: "flex", lg: "none" }, px: "0" }}>
                     <div>
                       <IconButton
@@ -191,7 +204,7 @@ export default function Navbar(props) {
                         color="neutral"
                         onClick={() => setOpen(true)}
                       >
-                        <LuMenu className={`text-3xl text-black `} />
+                        <LuMenu className={`text-3xl text-[#FFDEA8] `} />
                       </IconButton>
                       <Drawer open={open}>
                         <Box

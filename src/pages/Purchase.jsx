@@ -7,8 +7,36 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 import TitleForPages from "../components/common/TitleForPages";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Loading from "../components/Loading";
 
 export default function Purchase() {
+  const { id } = useParams();
+
+  const { data, isPending } = useQuery({
+    queryKey: ["purchase"],
+    queryFn: async () => {
+      return axios
+        .get(`http://localhost:3000/fooddetails/${id}`)
+        .then((res) => res.data);
+    },
+  });
+  const {
+    added_by,
+    description,
+    food_category,
+    food_image,
+    food_name,
+    food_origin,
+    price,
+    _id,
+  } = data || {};
+  if (isPending) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <TitleForPages DeviderWidth="250px" PageTitle="Purchase" />
@@ -17,11 +45,7 @@ export default function Purchase() {
 
         <div className=" lg:flex items-center justify-center">
           <div className=" flex justify-end ">
-            <img
-              className=" rounded-2xl"
-              src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFzdHJ5fGVufDB8fDB8fHww"
-              alt=""
-            />
+            <img className=" rounded-2xl" src={food_image} alt="" />
           </div>
           <Container
             component="main"
@@ -82,11 +106,10 @@ export default function Purchase() {
                     required
                     fullWidth
                     id="name"
-                    label="Your Name"
-                    name="name"
+                    value={food_name}
                     autoComplete="name"
                     type="text"
-                    autoFocus
+                    readOnly
                     sx={{
                       "& input": {
                         color: "#F5B57D",

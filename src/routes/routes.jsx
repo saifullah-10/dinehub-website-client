@@ -8,6 +8,7 @@ import Purchase from "../pages/Purchase";
 import AllFoods from "../pages/AllFoods";
 
 import SingleFood from "../pages/SingleFood";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/purchase",
-        element: <Purchase />,
+        path: "/purchase/:id",
+        element: (
+          <PrivateRoute>
+            <Purchase />
+          </PrivateRoute>
+        ),
       },
     ],
   },

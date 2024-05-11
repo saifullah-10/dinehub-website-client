@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 
 export default function SingleFood() {
   const { id } = useParams();
-  console.log(id);
+
   const { data, isPending } = useQuery({
     queryKey: ["fooddetails"],
     queryFn: async () => {
@@ -14,7 +14,7 @@ export default function SingleFood() {
         .then((res) => res.data);
     },
   });
-  console.log(data);
+
   if (isPending) {
     return <Loading />;
   }
@@ -27,6 +27,7 @@ export default function SingleFood() {
     food_name,
     food_origin,
     price,
+    _id,
   } = data;
   return (
     <div>
@@ -43,9 +44,11 @@ export default function SingleFood() {
               </div>
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
-                  <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656] dark:hover:bg-gray-700">
-                    Purchase
-                  </button>
+                  <Link to={`/purchase/${_id}`}>
+                    <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656] dark:hover:bg-gray-700">
+                      Purchase
+                    </button>
+                  </Link>
                 </div>
                 <div className="w-1/2 px-2"></div>
               </div>

@@ -8,7 +8,7 @@ import { FaGithub } from "react-icons/fa";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitleForPages from "../components/common/TitleForPages";
 import {
   GithubAuthProvider,
@@ -17,8 +17,14 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import auth from "../util/firebase.config";
+import { useContext } from "react";
+import { Context } from "../context/ContextProvide";
 
 export default function SignIn() {
+  const location = useLocation();
+  console.log(location);
+  const { setRefresh } = useContext(Context);
+  const navigate = useNavigate();
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -26,6 +32,12 @@ export default function SignIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         console.log(" sign In Success");
+        setRefresh((prev) => !prev);
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -37,6 +49,12 @@ export default function SignIn() {
     signInWithPopup(auth, googleProvider)
       .then(() => {
         console.log(" login successful");
+        setRefresh((prev) => !prev);
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -48,6 +66,12 @@ export default function SignIn() {
     signInWithPopup(auth, githubProvider)
       .then(() => {
         console.log("login success");
+        setRefresh((prev) => !prev);
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
       })
       .catch((err) => {
         console.log(err);
