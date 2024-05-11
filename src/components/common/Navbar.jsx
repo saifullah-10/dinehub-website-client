@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 import { LuMenu } from "react-icons/lu";
 import SiteLogo from "../../assets/common/res-logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import ModalClose from "@mui/joy/ModalClose";
+import { MdClose } from "react-icons/md";
 import { Context } from "../../context/ContextProvide";
 import { signOut } from "firebase/auth";
 import auth from "../../util/firebase.config";
@@ -181,14 +181,66 @@ export default function Navbar(props) {
                       }}
                       open={Boolean(anchorElUser)}
                       onClose={handleCloseUserMenu}
+                      PaperProps={{
+                        style: {
+                          background: "#B26803",
+                          border: "2px solid #FA9030 ",
+                        },
+                      }}
                     >
+                      <Link to={"/myadd"}>
+                        <MenuItem
+                          onClick={() => {
+                            handleCloseUserMenu();
+                          }}
+                        >
+                          <Typography
+                            textAlign="center"
+                            sx={{ color: "white" }}
+                          >
+                            My Added Food Items
+                          </Typography>
+                        </MenuItem>
+                      </Link>
+
+                      <Link to={"/addfood"}>
+                        <MenuItem
+                          onClick={() => {
+                            handleCloseUserMenu();
+                          }}
+                        >
+                          <Typography
+                            textAlign="center"
+                            sx={{ color: "white" }}
+                          >
+                            Add A food item
+                          </Typography>
+                        </MenuItem>
+                      </Link>
+
+                      <Link to={"/mypurchase"}>
+                        <MenuItem
+                          onClick={() => {
+                            handleCloseUserMenu();
+                          }}
+                        >
+                          <Typography
+                            textAlign="center"
+                            sx={{ color: "white" }}
+                          >
+                            My purchase
+                          </Typography>
+                        </MenuItem>
+                      </Link>
                       <MenuItem
                         onClick={() => {
                           handleCloseUserMenu();
                           handleLogout();
                         }}
                       >
-                        <Typography textAlign="center">Logout</Typography>
+                        <Typography textAlign="center" sx={{ color: "white" }}>
+                          Logout
+                        </Typography>
                       </MenuItem>
                     </Menu>
                   </Box>
@@ -206,7 +258,14 @@ export default function Navbar(props) {
                       >
                         <LuMenu className={`text-3xl text-[#FFDEA8] `} />
                       </IconButton>
-                      <Drawer open={open}>
+                      <Drawer
+                        open={open}
+                        PaperProps={{
+                          style: {
+                            backgroundColor: "#B26803",
+                          },
+                        }}
+                      >
                         <Box
                           sx={{
                             display: "flex",
@@ -218,20 +277,18 @@ export default function Navbar(props) {
                             px: "80px",
                           }}
                         >
-                          <Typography
-                            component="label"
-                            htmlFor="close-icon"
-                            fontSize="sm"
-                            fontWeight="lg"
-                            sx={{ cursor: "pointer" }}
-                          >
-                            Close
-                          </Typography>
-                          <ModalClose
+                          <IconButton
                             id="close-icon"
-                            sx={{ position: "initial" }}
+                            sx={{
+                              color: "white",
+                              "&:hover": {
+                                color: "#E2DFDA", // Change color on hover
+                              },
+                            }}
                             onClick={() => setOpen(false)}
-                          />
+                          >
+                            <MdClose />
+                          </IconButton>
                         </Box>
 
                         <List
@@ -241,12 +298,16 @@ export default function Navbar(props) {
                             flex: "none",
                             fontSize: "xl",
                             "& > div": { justifyContent: "center" },
+                            background: "#B26803",
                           }}
                         >
                           <ListItemButton
                             sx={{ fontWeight: "lg", color: "black" }}
                           >
-                            <Link to={"/"} className=" w-full text-center">
+                            <Link
+                              to={"/"}
+                              className=" w-full text-center text-white"
+                            >
                               {" "}
                               Home
                             </Link>
@@ -254,8 +315,8 @@ export default function Navbar(props) {
 
                           <ListItemButton>
                             <Link
-                              to={"/allspot"}
-                              className=" w-full text-center"
+                              to={"/allfoods"}
+                              className=" w-full text-center text-white"
                             >
                               {" "}
                               All Foods
@@ -265,7 +326,7 @@ export default function Navbar(props) {
                           <ListItemButton>
                             <Link
                               to={"/addspot"}
-                              className=" w-full text-center"
+                              className=" w-full text-center text-white"
                             >
                               {" "}
                               Gallery
@@ -276,7 +337,7 @@ export default function Navbar(props) {
                             <ListItemButton>
                               <Link
                                 to={"/mylist"}
-                                className=" w-full text-center"
+                                className=" w-full text-center text-white"
                               >
                                 {" "}
                                 My List

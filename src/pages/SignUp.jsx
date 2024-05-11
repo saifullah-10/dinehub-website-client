@@ -8,22 +8,34 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitleForPages from "../components/common/TitleForPages";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth from "../util/firebase.config";
 
 export default function SignUp() {
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
   const handleSignUp = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const photo = e.target.photo.value;
     const password = e.target.password.value;
-    console.log(name, email, photo, password);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log("success!");
+        updateProfile(auth.currentUser, { displayName: name, photoURL: photo })
+          .then(() => {
+            console.log("success!");
+            if (location?.state) {
+              navigate(location.state);
+            } else {
+              navigate("/");
+            }
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };

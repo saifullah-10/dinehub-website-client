@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Navigate, useLocation } from "react-router-dom";
 export default function PrivateRoute({ children }) {
   const location = useLocation();
-  console.log(location);
+
   const { user } = useContext(Context);
 
   if (!user) {

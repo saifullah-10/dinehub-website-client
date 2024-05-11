@@ -11,8 +11,11 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../components/Loading";
+import { useContext } from "react";
+import { Context } from "../context/ContextProvide";
 
 export default function Purchase() {
+  const { user } = useContext(Context);
   const { id } = useParams();
 
   const { data, isPending } = useQuery({
@@ -23,16 +26,38 @@ export default function Purchase() {
         .then((res) => res.data);
     },
   });
-  const {
-    added_by,
-    description,
-    food_category,
-    food_image,
-    food_name,
-    food_origin,
-    price,
-    _id,
-  } = data || {};
+  const { food_image, food_name, price } = data || {};
+
+  const { email, displayName } = user;
+  const handlePurchase = (e) => {
+    e.preventDefault();
+    const quantity = e.target.quantity.value;
+    if (!quantity) {
+      console.log(" must fill quantity");
+      return;
+    }
+    const date = e.target.date.value;
+
+    axios
+      .get(
+        `http://localhost:3000/purchase?id=${id}&quantity=${quantity}&uid=${user.uid}&date=${date}`
+      )
+      .then((res) => console.log(res.data));
+  };
+
+  // date
+  const timestamp = Date.now();
+  const date = new Date(timestamp);
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
+
   if (isPending) {
     return <Loading />;
   }
@@ -62,7 +87,12 @@ export default function Purchase() {
                 alignItems: "center",
               }}
             >
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Box
+                component="form"
+                onSubmit={handlePurchase}
+                noValidate
+                sx={{ mt: 1 }}
+              >
                 <div className=" lg:flex gap-2">
                   <TextField
                     margin="normal"
@@ -70,10 +100,10 @@ export default function Purchase() {
                     fullWidth
                     id="name"
                     label="Food Name"
-                    name="name"
+                    value={food_name}
                     autoComplete="name"
                     type="text"
-                    autoFocus
+                    focused="true"
                     sx={{
                       "& input": {
                         color: "#F5B57D",
@@ -106,10 +136,11 @@ export default function Purchase() {
                     required
                     fullWidth
                     id="name"
-                    value={food_name}
+                    label="Your Name"
+                    value={displayName}
                     autoComplete="name"
                     type="text"
-                    readOnly
+                    focused
                     sx={{
                       "& input": {
                         color: "#F5B57D",
@@ -144,9 +175,10 @@ export default function Purchase() {
                   fullWidth
                   id="email"
                   label="Email Address"
-                  name="email"
+                  value={email}
                   autoComplete="email"
                   type="email"
+                  focused
                   sx={{
                     "& input": {
                       color: "#F5B57D",
@@ -180,9 +212,9 @@ export default function Purchase() {
                   fullWidth
                   id="price"
                   label="Price"
-                  name="price"
-                  type="number"
-                  autoFocus
+                  value={`$ ${price} / pcs`}
+                  type="text/number"
+                  focused
                   sx={{
                     "& input": {
                       color: "#F5B57D",
@@ -253,8 +285,10 @@ export default function Purchase() {
                   id="date"
                   label="Date"
                   name="date"
+                  value={formattedDate}
                   autoComplete="date"
                   type="text"
+                  focused
                   sx={{
                     "& input": {
                       color: "#F5B57D",
