@@ -11,6 +11,8 @@ import GalleryArticle from "../components/GalleryArticle";
 import { useContext, useState } from "react";
 import { Context } from "../context/ContextProvide";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../components/Loading";
 
 export default function Gallery() {
   const {
@@ -25,6 +27,20 @@ export default function Gallery() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const { data, isPending } = useQuery({
+    queryKey: ["feedback"],
+    queryFn: async () => {
+      return axios
+        .get("http://localhost:3000/feedbackdata")
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    },
+  });
+  console.log(data);
+  if (isPending) {
+    return <Loading />;
+  }
   return (
     <div>
       <div>
@@ -43,10 +59,9 @@ export default function Gallery() {
               </button>
             </div>
             <div className="grid max-w-2xl grid-cols-1 gap-8 mx-auto mt-8 auto-rows-fr lg:mx-0 lg:max-w-none lg:grid-cols-3">
-              <GalleryArticle />
-              <GalleryArticle />
-              <GalleryArticle />
-              <GalleryArticle />
+              {data?.map((data) => (
+                <GalleryArticle key={data._id} data={data} />
+              ))}
               {/* Other articles */}
             </div>
           </div>
