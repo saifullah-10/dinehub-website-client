@@ -1,10 +1,40 @@
 import { useContext } from "react";
 import TitleForPages from "../components/common/TitleForPages";
 import { Context } from "../context/ContextProvide";
+import axios from "axios";
 
 export default function AddFood() {
   const { user } = useContext(Context);
-  const { displayName } = user;
+  const { displayName, uid } = user;
+
+  const handleAddSubmit = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const photo = e.target.photo.value;
+    const price = e.target.price.value;
+    const addby = e.target.addby.value;
+    const description = e.target.description.value;
+    const category = e.target.category.value;
+    const quantity = e.target.quantity.value;
+    const origin = e.target.origin.value;
+    console.log(name, description, category, quantity, origin, price, photo);
+    const addData = {
+      food_name: name,
+      food_image: photo,
+      food_category: category,
+      quantity: quantity,
+      price: price,
+      added_by: addby,
+      food_origin: origin,
+      description: description,
+      uid: uid,
+      count: 0,
+    };
+    axios
+      .post("http://localhost:3000/addFood", addData)
+      .then((res) => console.log(res))
+      .catch((e) => console.error(e));
+  };
   return (
     <div>
       <div>
@@ -14,7 +44,7 @@ export default function AddFood() {
       <div>
         <section className=" dark:bg-gray-900">
           <div className=" px-4 mx-auto max-w-2xl">
-            <form action="#">
+            <form onSubmit={handleAddSubmit}>
               <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div className="sm:col-span-2">
                   <label
@@ -34,31 +64,47 @@ export default function AddFood() {
                 </div>
                 <div className="sm:col-span-2">
                   <label
-                    htmlFor="name"
+                    htmlFor="photo"
                     className="block mb-2 text-sm font-medium text-[#F39423] dark:text-[#F8BD69]"
                   >
                     Food Image URL
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    id="name"
+                    name="photo"
+                    id="photo"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg   focus:border-[#FAA846] block w-full p-2.5 "
                     placeholder="Type Food Image URL"
                     required
                   />
                 </div>
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="origin"
+                    className="block mb-2 text-sm font-medium text-[#F39423] dark:text-[#F8BD69]"
+                  >
+                    Food Origin
+                  </label>
+                  <input
+                    type="text"
+                    name="origin"
+                    id="origin"
+                    className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg   focus:border-[#FAA846] block w-full p-2.5 "
+                    placeholder="Type Food Origin"
+                    required
+                  />
+                </div>
                 <div className="w-full">
                   <label
-                    htmlFor="brand"
+                    htmlFor="categoty"
                     className="block mb-2 text-sm font-medium text-[#F39423] dark:text-[#F8BD69]"
                   >
                     Food Category
                   </label>
                   <input
                     type="text"
-                    name="brand"
-                    id="brand"
+                    name="category"
+                    id="categoty"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg  focus:border-[#FAA846] block w-full p-2.5 "
                     placeholder="Food Category"
                     required
@@ -66,16 +112,16 @@ export default function AddFood() {
                 </div>
                 <div className="w-full">
                   <label
-                    htmlFor="price"
+                    htmlFor="addby"
                     className="block mb-2 text-sm font-medium text-[#F39423] dark:text-[#F8BD69]"
                   >
                     Add By
                   </label>
                   <input
                     type="text"
-                    name="price"
+                    name="addby"
                     value={displayName}
-                    id="price"
+                    id="addby"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg  focus:border-[#FAA846] block w-full p-2.5 "
                     placeholder="$2999"
                     required
@@ -83,17 +129,17 @@ export default function AddFood() {
                 </div>
                 <div className="w-full">
                   <label
-                    htmlFor="brand"
+                    htmlFor="quantity"
                     className="block mb-2 text-sm font-medium text-[#F39423] dark:text-[#F8BD69]"
                   >
                     Quantity
                   </label>
                   <input
                     type="text"
-                    name="brand"
-                    id="brand"
+                    name="quantity"
+                    id="quantity"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg  focus:border-[#FAA846] block w-full p-2.5 "
-                    placeholder="Food Category"
+                    placeholder="Food Quantity"
                     required
                   />
                 </div>
@@ -109,7 +155,7 @@ export default function AddFood() {
                     name="price"
                     id="price"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg  focus:border-[#FAA846] block w-full p-2.5 "
-                    placeholder="$2999"
+                    placeholder="Food Price"
                     required
                   />
                 </div>
