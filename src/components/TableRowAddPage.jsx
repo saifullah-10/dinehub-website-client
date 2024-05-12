@@ -11,7 +11,7 @@ import { Textarea } from "@mui/joy";
 import { Box } from "@mui/material";
 import axios from "axios";
 
-export default function TableRowAddPage({ data }) {
+export default function TableRowAddPage({ data, refetch }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -99,7 +99,10 @@ export default function TableRowAddPage({ data }) {
 
             axios
               .post(`http://localhost:3000/updatefoods/${_id}`, updateData)
-              .then((res) => console.log(res))
+              .then((res) => {
+                console.log(res);
+                refetch();
+              })
               .catch((e) => console.error(e));
 
             handleClose();
@@ -411,4 +414,5 @@ export default function TableRowAddPage({ data }) {
 
 TableRowAddPage.propTypes = {
   data: PropTypes.object.isRequired,
+  refetch: PropTypes.func.isRequired,
 };

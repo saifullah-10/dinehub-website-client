@@ -11,7 +11,7 @@ export default function MyAdded() {
     user: { uid },
   } = useContext(Context);
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["myAdd"],
     queryFn: async () => {
       return axios
@@ -63,7 +63,7 @@ export default function MyAdded() {
           </thead>
           <tbody className="bg-transparent divide-y divide-[#FAA846]">
             {data?.map((data) => (
-              <TableRowAddPage key={data._id} data={data} />
+              <TableRowAddPage key={data._id} data={data} refetch={refetch} />
             ))}
             {/* More rows... */}
           </tbody>

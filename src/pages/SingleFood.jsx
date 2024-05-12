@@ -70,21 +70,17 @@ export default function SingleFood() {
               </div>
               <div className="flex mb-4">
                 <div className="mr-4">
-                  <span className="font-bold  text-[#F78656]">Made By: </span>
+                  <span className="font-bold  text-[#F78656]">Add By: </span>
                   <span className="">{added_by}</span>
                 </div>
                 <div>
-                  <span className="font-bold text-[#F78656] ">Category: </span>
-                  <span className="">{food_category}</span>
+                  <span className="font-bold text-[#F78656] ">
+                    Food Origin:{" "}
+                  </span>
+                  <span className="">{food_origin}</span>
                 </div>
               </div>
 
-              <div className="mb-4">
-                <span className="font-bold text-[#F78656] ">Food Origin:</span>
-                <div className="flex items-center mt-2">
-                  <p>{food_origin}</p>
-                </div>
-              </div>
               <div>
                 <span className="font-bold  text-[#F78656]">
                   Product Description:
