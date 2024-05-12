@@ -8,7 +8,7 @@ export default function AddFood() {
   return (
     <div>
       <div>
-        <TitleForPages PageTitle="Add A Food Item" DeviderWidth="500px" />
+        <TitleForPages PageTitle="Add A Food Item" DeviderWidth="400px" />
       </div>
       {/* form */}
       <div>
@@ -37,14 +37,14 @@ export default function AddFood() {
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-[#F39423] dark:text-[#F8BD69]"
                   >
-                    Food URL
+                    Food Image URL
                   </label>
                   <input
                     type="text"
                     name="name"
                     id="name"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg   focus:border-[#FAA846] block w-full p-2.5 "
-                    placeholder="Type Food URL"
+                    placeholder="Type Food Image URL"
                     required
                   />
                 </div>

@@ -26,7 +26,7 @@ export default function MyAdded() {
   return (
     <div>
       <div>
-        <TitleForPages PageTitle="My Add Foods" DeviderWidth="500px" />
+        <TitleForPages PageTitle="My Add Foods" DeviderWidth="400px" />
       </div>
       {/* table */}
       <div className="overflow-x-auto px-3">
