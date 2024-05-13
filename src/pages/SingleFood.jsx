@@ -2,10 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useContext } from "react";
+import { Context } from "../context/ContextProvide";
 
 export default function SingleFood() {
   const { id } = useParams();
-
+  const { user } = useContext(Context);
+  const userUid = user?.uid;
   const { data, isPending } = useQuery({
     queryKey: ["fooddetails"],
     queryFn: async () => {
@@ -27,8 +30,12 @@ export default function SingleFood() {
     food_name,
     food_origin,
     price,
+    uid,
     _id,
   } = data;
+  console.log(uid, userUid);
+  const sameUser = uid === userUid ? true : false;
+
   return (
     <div>
       <div className="   py-8">
@@ -44,11 +51,23 @@ export default function SingleFood() {
               </div>
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
-                  <Link to={`/purchase/${_id}`}>
-                    <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656] dark:hover:bg-gray-700">
-                      Purchase
-                    </button>
-                  </Link>
+                  {sameUser ? (
+                    <div>
+                      <button
+                        className={`w-full cursor-not-allowed border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]`}
+                        disabled
+                      >
+                        Purchase
+                      </button>
+                      <p className=" my-3">This Food Add By You</p>
+                    </div>
+                  ) : (
+                    <Link to={`/purchase/${_id}`} className="w-full">
+                      <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]">
+                        Purchase
+                      </button>
+                    </Link>
+                  )}
                 </div>
                 <div className="w-1/2 px-2"></div>
               </div>

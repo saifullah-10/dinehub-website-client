@@ -5,15 +5,23 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../components/Loading";
+import { useContext, useEffect } from "react";
+import { Context } from "../context/ContextProvide";
 export default function Home() {
-  const { data, isPending } = useQuery({
+  const { user } = useContext(Context);
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["foodCards"],
     queryFn: async () => {
       return axios
-        .get("http://localhost:3000/homecard?elements=6")
+        .get(`http://localhost:3000/homecard?elements=6`)
         .then((res) => res.data);
     },
   });
+  useEffect(() => {
+    if (!user) {
+      refetch();
+    }
+  }, [user, refetch]);
 
   if (isPending) {
     return <Loading />;

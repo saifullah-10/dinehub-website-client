@@ -24,6 +24,7 @@ import { MdClose } from "react-icons/md";
 import { Context } from "../../context/ContextProvide";
 import { signOut } from "firebase/auth";
 import auth from "../../util/firebase.config";
+import swal from "sweetalert";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -49,7 +50,7 @@ export default function Navbar(props) {
   const navigate = useNavigate();
   const { user, setUser } = useContext(Context);
   const [open, setOpen] = useState(false);
-  // const [anchorElNav, setAnchorElNav] = useState(null);
+
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -63,11 +64,23 @@ export default function Navbar(props) {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
+        swal({
+          title: "Successfully Logout",
+
+          icon: "success",
+          button: "Ok",
+        });
         navigate("/");
         setUser(null);
         console.log("User logged out");
       })
       .catch((err) => {
+        swal({
+          title: "Something went wrong, Please try again",
+
+          icon: "error",
+          button: "Ok",
+        });
         console.log("something went wrong", err);
       });
   };

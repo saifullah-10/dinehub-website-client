@@ -2,6 +2,7 @@ import { useContext } from "react";
 import TitleForPages from "../components/common/TitleForPages";
 import { Context } from "../context/ContextProvide";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function AddFood() {
   const { user } = useContext(Context);
@@ -17,13 +18,21 @@ export default function AddFood() {
     const category = e.target.category.value;
     const quantity = e.target.quantity.value;
     const origin = e.target.origin.value;
-    console.log(name, description, category, quantity, origin, price, photo);
+    if (!/^(ftp|http|https):\/\/[^ "]+$/.test(photo)) {
+      swal({
+        title: "Something went wrong, Provide valid URL",
+
+        icon: "error",
+        button: "Ok",
+      });
+      return;
+    }
     const addData = {
       food_name: name,
       food_image: photo,
       food_category: category,
-      quantity: quantity,
-      price: price,
+      quantity: parseInt(quantity),
+      price: parseFloat(price),
       added_by: addby,
       food_origin: origin,
       description: description,
@@ -32,8 +41,24 @@ export default function AddFood() {
     };
     axios
       .post("http://localhost:3000/addFood", addData)
-      .then((res) => console.log(res))
-      .catch((e) => console.error(e));
+      .then((res) => {
+        console.log(res);
+        swal({
+          title: "Successfully Added",
+
+          icon: "success",
+          button: "Ok",
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        swal({
+          title: "Something went wrong, Please try again",
+
+          icon: "error",
+          button: "Ok",
+        });
+      });
   };
   return (
     <div>
@@ -121,9 +146,9 @@ export default function AddFood() {
                     type="text"
                     name="addby"
                     value={displayName}
+                    readOnly
                     id="addby"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg  focus:border-[#FAA846] block w-full p-2.5 "
-                    placeholder="$2999"
                     required
                   />
                 </div>
@@ -170,6 +195,7 @@ export default function AddFood() {
                   <textarea
                     id="description"
                     rows="8"
+                    required
                     className="block focus:outline-none p-2.5 w-full text-sm text-[#F8BD69] bg-transparent rounded-lg border border-[#FAA846] focus:ring-primary-500 focus:border-primary-500 "
                     placeholder="Your description here"
                   />

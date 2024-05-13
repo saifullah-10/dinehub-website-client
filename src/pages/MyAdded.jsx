@@ -55,7 +55,7 @@ export default function MyAdded() {
 
               <th
                 scope="col"
-                className="px-4 py-3 text-left font-medium uppercase tracking-wider"
+                className="px-4 py-3 text-left font-medium uppercase text-center tracking-wider"
               >
                 Actions
               </th>

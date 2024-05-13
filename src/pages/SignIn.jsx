@@ -19,6 +19,7 @@ import {
 import auth from "../util/firebase.config";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
+import swal from "sweetalert";
 
 export default function SignIn() {
   const location = useLocation();
@@ -33,13 +34,28 @@ export default function SignIn() {
       .then(() => {
         console.log(" sign In Success");
         setRefresh((prev) => !prev);
+        swal({
+          title: "Successfully Login",
+
+          icon: "success",
+          button: "Ok",
+        });
         if (location?.state) {
           navigate(location.state);
         } else {
           navigate("/");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        swal({
+          title:
+            "Something went wrong, Please try again, Check your email and password",
+
+          icon: "error",
+          button: "Ok",
+        });
+      });
   };
 
   // google login
@@ -48,7 +64,12 @@ export default function SignIn() {
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
       .then(() => {
-        console.log(" login successful");
+        swal({
+          title: "Successfully Login",
+
+          icon: "success",
+          button: "Ok",
+        });
         setRefresh((prev) => !prev);
         if (location?.state) {
           navigate(location.state);
@@ -58,6 +79,12 @@ export default function SignIn() {
       })
       .catch((err) => {
         console.log(err);
+        swal({
+          title: "Something went wrong, Please try again",
+
+          icon: "error",
+          button: "Ok",
+        });
       });
   };
   // github login
@@ -65,7 +92,12 @@ export default function SignIn() {
   const handleGithubLogin = () => {
     signInWithPopup(auth, githubProvider)
       .then(() => {
-        console.log("login success");
+        swal({
+          title: "Successfully Login",
+
+          icon: "success",
+          button: "Ok",
+        });
         setRefresh((prev) => !prev);
         if (location?.state) {
           navigate(location.state);
@@ -75,6 +107,12 @@ export default function SignIn() {
       })
       .catch((err) => {
         console.log(err);
+        swal({
+          title: "Something went wrong, Please try again",
+
+          icon: "error",
+          button: "Ok",
+        });
       });
   };
   return (

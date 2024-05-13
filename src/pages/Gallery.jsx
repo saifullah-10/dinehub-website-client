@@ -13,6 +13,7 @@ import { Context } from "../context/ContextProvide";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
+import swal from "sweetalert";
 
 export default function Gallery() {
   const { user } = useContext(Context);
@@ -94,10 +95,23 @@ export default function Gallery() {
               .post("http://localhost:3000/feedback", feedbackData)
               .then((res) => {
                 console.log(res);
+                swal({
+                  title: "Successfully Add Feedback",
+
+                  icon: "success",
+                  button: "Ok",
+                });
                 refetch();
               })
-              .catch((e) => console.log(e));
-            console.log(feedbackData);
+              .catch((e) => {
+                swal({
+                  title: "Something went wrong, please try again",
+
+                  icon: "error",
+                  button: "Ok",
+                });
+                console.log(e);
+              });
 
             handleClose();
           },

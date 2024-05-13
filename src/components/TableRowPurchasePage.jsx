@@ -1,5 +1,6 @@
 import axios from "axios";
 import PropTypes from "prop-types";
+import swal from "sweetalert";
 
 export default function TableRowPurchasePage({ data, refetch }) {
   const {
@@ -13,13 +14,28 @@ export default function TableRowPurchasePage({ data, refetch }) {
     price,
   } = data || {};
   const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3000/deleteorder/${orderId}`)
-      .then((res) => {
-        console.log(res);
-        refetch();
-      })
-      .catch((e) => console.log(e));
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover food order!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`http://localhost:3000/deleteorder/${orderId}`)
+          .then((res) => {
+            console.log(res);
+            swal("Successfully Deleted", {
+              icon: "success",
+            });
+            refetch();
+          })
+          .catch((e) => console.log(e));
+      } else {
+        swal("Your order is safe!");
+      }
+    });
   };
   return (
     <tr className=" text-white">

@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 
 export default function AllFoods() {
   const [data, setData] = useState(null);
+
   const { data: allData, isPending } = useQuery({
     queryKey: ["allFoods"],
     queryFn: async () => {
       return axios
-        .get("http://localhost:3000/allfoods")
+        .get(`http://localhost:3000/allfoods`)
         .then((res) => res.data);
     },
   });

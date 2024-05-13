@@ -13,6 +13,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
+import swal from "sweetalert";
 
 export default function Purchase() {
   const { user } = useContext(Context);
@@ -42,7 +43,23 @@ export default function Purchase() {
       .get(
         `http://localhost:3000/purchase?id=${id}&quantity=${quantity}&uid=${user.uid}&date=${date}`
       )
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        console.log(res.data);
+        swal({
+          title: "Successfully Purchase",
+
+          icon: "success",
+          button: "Ok",
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        swal({
+          title: "Something went wrong, please try again",
+          icon: "error",
+          button: "Ok",
+        });
+      });
   };
 
   // date
@@ -187,21 +204,21 @@ export default function Purchase() {
                       color: "white",
                     },
                     "& label.Mui-focused": {
-                      color: "#F5B57D", // Change label color when focused
+                      color: "#F5B57D",
                     },
 
                     "&.Mui-focused fieldset": {
-                      borderColor: "green", // Change border color when focused
+                      borderColor: "green",
                     },
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
-                        borderColor: "red", // Change border color when not focused
+                        borderColor: "red",
                       },
                       "&:hover fieldset": {
-                        borderColor: "blue", // Change border color on hover
+                        borderColor: "blue",
                       },
                       "&.Mui-focused fieldset": {
-                        borderColor: "green", // Change border color when focused
+                        borderColor: "green",
                       },
                     },
                   }}

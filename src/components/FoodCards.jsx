@@ -8,7 +8,7 @@ export default function FoodCards({ data, quantity = false }) {
     food_name,
     _id,
     quantity: food_quantity,
-  } = data;
+  } = data || {};
   return (
     <div className=" flex justify-center">
       <div className="w-full   border-2 border-[#FA6E31] text-[#e7a661] rounded-lg shadow  ">

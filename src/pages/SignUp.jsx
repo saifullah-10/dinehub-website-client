@@ -12,6 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitleForPages from "../components/common/TitleForPages";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth from "../util/firebase.config";
+import swal from "sweetalert";
 
 export default function SignUp() {
   const location = useLocation();
@@ -23,21 +24,80 @@ export default function SignUp() {
     const email = e.target.email.value;
     const photo = e.target.photo.value;
     const password = e.target.password.value;
+    const isValidName = /\S+/.test(name);
+    const isValidEmail = /\S+/.test(email);
+    const isValidPhoto = /\S+/.test(photo);
+    const isValidPassword = /\S+/.test(password);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        updateProfile(auth.currentUser, { displayName: name, photoURL: photo })
-          .then(() => {
-            console.log("success!");
-            if (location?.state) {
-              navigate(location.state);
-            } else {
-              navigate("/");
-            }
+    if (!isValidName || !isValidEmail || !isValidPhoto || !isValidPassword) {
+      swal({
+        title: "Something went wrong, All fields are required",
+
+        icon: "error",
+        button: "Ok",
+      });
+    } else {
+      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!isValidEmail) {
+        swal({
+          title: "Something went wrong, provide a valid EMAIL",
+
+          icon: "error",
+          button: "Ok",
+        });
+        return;
+      }
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password);
+      if (!passwordRegex) {
+        swal({
+          title:
+            "Something went wrong, provide a strong password with at least one uppercase letter and one lowercase letter and 6 digits",
+
+          icon: "error",
+          button: "Ok",
+        });
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo,
           })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
+            .then(() => {
+              swal({
+                title: "Successfully Registered",
+
+                icon: "success",
+                button: "Ok",
+              });
+              if (location?.state) {
+                navigate(location.state);
+              } else {
+                navigate("/");
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              swal({
+                title: "Something went wrong, Please try again",
+
+                icon: "error",
+                button: "Ok",
+              });
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          swal({
+            title: "Something went wrong, Please try again",
+
+            icon: "error",
+            button: "Ok",
+          });
+        });
+    }
   };
 
   return (
@@ -82,7 +142,7 @@ export default function SignUp() {
                     color: "white",
                   },
                   "& label.Mui-focused": {
-                    color: "#F5B57D", // Change label color when focused
+                    color: "#F5B57D",
                   },
 
                   "&.Mui-focused fieldset": {
@@ -90,13 +150,13 @@ export default function SignUp() {
                   },
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "red", // Change border color when not focused
+                      borderColor: "red",
                     },
                     "&:hover fieldset": {
-                      borderColor: "blue", // Change border color on hover
+                      borderColor: "blue",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "green", // Change border color when focused
+                      borderColor: "green",
                     },
                   },
                 }}
@@ -119,21 +179,21 @@ export default function SignUp() {
                     color: "white",
                   },
                   "& label.Mui-focused": {
-                    color: "#F5B57D", // Change label color when focused
+                    color: "#F5B57D",
                   },
 
                   "&.Mui-focused fieldset": {
-                    borderColor: "green", // Change border color when focused
+                    borderColor: "green",
                   },
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "red", // Change border color when not focused
+                      borderColor: "red",
                     },
                     "&:hover fieldset": {
-                      borderColor: "blue", // Change border color on hover
+                      borderColor: "blue",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "green", // Change border color when focused
+                      borderColor: "green",
                     },
                   },
                 }}
@@ -154,21 +214,21 @@ export default function SignUp() {
                     color: "white",
                   },
                   "& label.Mui-focused": {
-                    color: "#F5B57D", // Change label color when focused
+                    color: "#F5B57D",
                   },
 
                   "&.Mui-focused fieldset": {
-                    borderColor: "green", // Change border color when focused
+                    borderColor: "green",
                   },
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "red", // Change border color when not focused
+                      borderColor: "red",
                     },
                     "&:hover fieldset": {
-                      borderColor: "blue", // Change border color on hover
+                      borderColor: "blue",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "green", // Change border color when focused
+                      borderColor: "green",
                     },
                   },
                 }}
@@ -190,21 +250,21 @@ export default function SignUp() {
                     color: "white",
                   },
                   "& label.Mui-focused": {
-                    color: "#F5B57D", // Change label color when focused
+                    color: "#F5B57D",
                   },
 
                   "&.Mui-focused fieldset": {
-                    borderColor: "green", // Change border color when focused
+                    borderColor: "green",
                   },
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "red", // Change border color when not focused
+                      borderColor: "red",
                     },
                     "&:hover fieldset": {
-                      borderColor: "blue", // Change border color on hover
+                      borderColor: "blue",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "green", // Change border color when focused
+                      borderColor: "green",
                     },
                   },
                 }}

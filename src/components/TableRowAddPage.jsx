@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { Textarea } from "@mui/joy";
 import { Box } from "@mui/material";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function TableRowAddPage({ data, refetch }) {
   const [open, setOpen] = useState(false);
@@ -32,6 +33,32 @@ export default function TableRowAddPage({ data, refetch }) {
     price,
     _id,
   } = data || {};
+  const handleDelete = () => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this  food!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .post(`http://localhost:3000/deleteaddfood/${_id}`)
+          .then((res) => {
+            console.log(res);
+            swal("Success! Your food has been deleted!", {
+              icon: "success",
+            });
+            refetch();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      } else {
+        swal("Your food items is safe!");
+      }
+    });
+  };
   return (
     <>
       <tr className=" text-white">
@@ -55,13 +82,21 @@ export default function TableRowAddPage({ data, refetch }) {
         </td>
         <td className="px-4 py-3 whitespace-nowrap text-sm ">{quantity} pcs</td>
 
-        <td className="px-4 py-3 whitespace-nowrap  text-sm font-medium">
-          <Button
-            sx={{ border: "2px solid #CA7107 ", color: "white" }}
-            onClick={handleClickOpen}
-          >
-            Update
-          </Button>
+        <td className="px-4 flex justify-center   py-3 whitespace-nowrap  text-sm font-medium">
+          <div className=" flex gap-3">
+            <Button
+              sx={{ border: "2px solid #CA7107 ", color: "white" }}
+              onClick={handleClickOpen}
+            >
+              Update
+            </Button>
+            <Button
+              sx={{ border: "2px solid #FA2222 ", color: "white" }}
+              onClick={handleDelete}
+            >
+              DELETE
+            </Button>
+          </div>
         </td>
       </tr>
       {/* modal */}
@@ -97,13 +132,38 @@ export default function TableRowAddPage({ data, refetch }) {
             };
             console.log(updateData);
 
-            axios
-              .post(`http://localhost:3000/updatefoods/${_id}`, updateData)
-              .then((res) => {
-                console.log(res);
-                refetch();
-              })
-              .catch((e) => console.error(e));
+            // swal
+            swal({
+              title: "Are you sure to update?",
+
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            }).then((willDelete) => {
+              if (willDelete) {
+                axios
+                  .post(`http://localhost:3000/updatefoods/${_id}`, updateData)
+                  .then((res) => {
+                    console.log(res);
+                    swal("Update Successfully", {
+                      icon: "success",
+                    });
+                    refetch();
+                  })
+                  .catch((e) => {
+                    console.error(e);
+                    swal({
+                      title: "Something went wrong, Please try again",
+
+                      icon: "error",
+                      button: "Ok",
+                    });
+                  });
+              } else {
+                swal("Cancled");
+              }
+            });
+            // swal
 
             handleClose();
           },
