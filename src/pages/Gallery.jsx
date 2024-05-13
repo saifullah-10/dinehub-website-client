@@ -15,9 +15,8 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
 
 export default function Gallery() {
-  const {
-    user: { displayName },
-  } = useContext(Context);
+  const { user } = useContext(Context);
+  const displayName = user ? user.displayName : null;
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -111,7 +110,7 @@ export default function Gallery() {
             id="name"
             name="name"
             label="Your name"
-            value={displayName}
+            value={displayName ?? "none"}
             type="text"
             fullWidth
             variant="standard"
