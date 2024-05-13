@@ -11,7 +11,7 @@ export default function AllFoods() {
     queryKey: ["allFoods"],
     queryFn: async () => {
       return axios
-        .get("http://localhost:3000/homecard")
+        .get("http://localhost:3000/allfoods")
         .then((res) => res.data);
     },
   });

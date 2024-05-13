@@ -1,4 +1,4 @@
-import PropTypes from "propTypes";
+import PropTypes from "prop-types";
 export default function GalleryArticle({ data }) {
   const { photo_URL, user_feedback, user_name } = data || {};
   return (

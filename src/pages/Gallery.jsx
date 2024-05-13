@@ -28,7 +28,7 @@ export default function Gallery() {
     setOpen(false);
   };
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["feedback"],
     queryFn: async () => {
       return axios
@@ -93,7 +93,10 @@ export default function Gallery() {
             };
             axios
               .post("http://localhost:3000/feedback", feedbackData)
-              .then((res) => console.log(res))
+              .then((res) => {
+                console.log(res);
+                refetch();
+              })
               .catch((e) => console.log(e));
             console.log(feedbackData);
 
