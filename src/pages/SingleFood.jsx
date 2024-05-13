@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useContext } from "react";
-import { Context } from "../context/ContextProvide";
+import { useEffect } from "react";
+
+import { Helmet } from "react-helmet";
 
 export default function SingleFood() {
   const { id } = useParams();
-  const { user } = useContext(Context);
-  const userUid = user?.uid;
+
   const { data, isPending } = useQuery({
     queryKey: ["fooddetails"],
     queryFn: async () => {
@@ -17,7 +17,9 @@ export default function SingleFood() {
         .then((res) => res.data);
     },
   });
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (isPending) {
     return <Loading />;
   }
@@ -30,14 +32,16 @@ export default function SingleFood() {
     food_name,
     food_origin,
     price,
-    uid,
+
     _id,
   } = data;
-  console.log(uid, userUid);
-  const sameUser = uid === userUid ? true : false;
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title> Details</title>
+      </Helmet>
       <div className="   py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row -mx-4 text-[#F9B294]">
@@ -51,23 +55,11 @@ export default function SingleFood() {
               </div>
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
-                  {sameUser ? (
-                    <div>
-                      <button
-                        className={`w-full cursor-not-allowed border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]`}
-                        disabled
-                      >
-                        Purchase
-                      </button>
-                      <p className=" my-3">This Food Add By You</p>
-                    </div>
-                  ) : (
-                    <Link to={`/purchase/${_id}`} className="w-full">
-                      <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]">
-                        Purchase
-                      </button>
-                    </Link>
-                  )}
+                  <Link to={`/purchase/${_id}`} className="w-full">
+                    <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]">
+                      Purchase
+                    </button>
+                  </Link>
                 </div>
                 <div className="w-1/2 px-2"></div>
               </div>

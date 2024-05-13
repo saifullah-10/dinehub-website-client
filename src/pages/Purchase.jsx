@@ -14,6 +14,7 @@ import Loading from "../components/Loading";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet";
 
 export default function Purchase() {
   const { user } = useContext(Context);
@@ -81,6 +82,10 @@ export default function Purchase() {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Purchase</title>
+      </Helmet>
       <TitleForPages DeviderWidth="250px" PageTitle="Purchase" />
       <div>
         {/* form */}

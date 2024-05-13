@@ -5,6 +5,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
+import { Helmet } from "react-helmet";
 
 export default function MyAdded() {
   const {
@@ -25,50 +26,64 @@ export default function MyAdded() {
   }
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title> My Add Items</title>
+      </Helmet>
       <div>
         <TitleForPages PageTitle="My Add Foods" DeviderWidth="400px" />
       </div>
       {/* table */}
-      <div className="overflow-x-auto px-3">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-[#E1881E] text-white">
-            <tr>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left font-medium uppercase tracking-wider"
-              >
-                Foods
-              </th>
+      {data.length === 0 ? (
+        <div>
+          <div className="flex justify-center items-center ">
+            <h1 className="text-4xl font-bold text-[#E1881E]">
+              You have not added any foods
+            </h1>
+          </div>
+        </div>
+      ) : (
+        <div className="overflow-x-auto px-3">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-[#E1881E] text-white">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-4 py-3 text-left font-medium uppercase tracking-wider"
+                >
+                  Foods
+                </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3 text-left font-medium uppercase tracking-wider"
-              >
-                Price
-              </th>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left font-medium uppercase tracking-wider"
-              >
-                Quantity
-              </th>
+                <th
+                  scope="col"
+                  className="px-4 py-3 text-left font-medium uppercase tracking-wider"
+                >
+                  Price
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-3 text-left font-medium uppercase tracking-wider"
+                >
+                  Quantity
+                </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3 text-left font-medium uppercase text-center tracking-wider"
-              >
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-transparent divide-y divide-[#FAA846]">
-            {data?.map((data) => (
-              <TableRowAddPage key={data._id} data={data} refetch={refetch} />
-            ))}
-            {/* More rows... */}
-          </tbody>
-        </table>
-      </div>
+                <th
+                  scope="col"
+                  className="px-4 py-3  font-medium uppercase text-center tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-transparent divide-y divide-[#FAA846]">
+              {data?.map((data) => (
+                <TableRowAddPage key={data._id} data={data} refetch={refetch} />
+              ))}
+              {/* More rows... */}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

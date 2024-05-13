@@ -14,14 +14,21 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 export default function Gallery() {
   const { user } = useContext(Context);
+  const navigate = useNavigate();
   const displayName = user ? user.displayName : null;
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if (user) {
+      setOpen(true);
+    } else {
+      navigate("/signin");
+    }
   };
 
   const handleClose = () => {
@@ -43,6 +50,10 @@ export default function Gallery() {
   }
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Gallery</title>
+      </Helmet>
       <div>
         <TitleForPages PageTitle="Gallery" />
       </div>

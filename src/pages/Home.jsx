@@ -7,6 +7,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/ContextProvide";
+import { Helmet } from "react-helmet";
 export default function Home() {
   const { user } = useContext(Context);
   const { data, isPending, refetch } = useQuery({
@@ -22,13 +23,19 @@ export default function Home() {
       refetch();
     }
   }, [user, refetch]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (isPending) {
     return <Loading />;
   }
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title> Home</title>
+      </Helmet>
       {/* hero */}
       <section className=" lg:py-20 ">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto gap-7 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">

@@ -130,22 +130,6 @@ export default function Navbar(props) {
                       </a>
                     </NavLink>
                   </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#F28B30] md:p-0 "
-                    >
-                      Pricing
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#F28B30] md:p-0 "
-                    >
-                      Contact
-                    </a>
-                  </li>
                 </ul>
               </div>
 
@@ -340,25 +324,13 @@ export default function Navbar(props) {
 
                           <ListItemButton>
                             <Link
-                              to={"/addspot"}
+                              to={"/gallery"}
                               className=" w-full text-center text-white"
                             >
                               {" "}
                               Gallery
                             </Link>
                           </ListItemButton>
-
-                          {user && (
-                            <ListItemButton>
-                              <Link
-                                to={"/mylist"}
-                                className=" w-full text-center text-white"
-                              >
-                                {" "}
-                                My List
-                              </Link>
-                            </ListItemButton>
-                          )}
                         </List>
                       </Drawer>
                     </div>

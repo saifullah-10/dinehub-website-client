@@ -4,6 +4,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import FoodCards from "../components/FoodCards";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 export default function AllFoods() {
   const [data, setData] = useState(null);
@@ -27,12 +28,19 @@ export default function AllFoods() {
       .get(`http://localhost:3000/foods/search?q=${value}`)
       .then((res) => setData(res.data));
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (isPending) {
     return <Loading />;
   }
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title> All Foods</title>
+      </Helmet>
       <TitleForPages PageTitle="All Foods" DeviderWidth="250px" />
 
       <div>

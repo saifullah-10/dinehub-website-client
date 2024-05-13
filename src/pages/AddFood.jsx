@@ -3,6 +3,7 @@ import TitleForPages from "../components/common/TitleForPages";
 import { Context } from "../context/ContextProvide";
 import axios from "axios";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet";
 
 export default function AddFood() {
   const { user } = useContext(Context);
@@ -62,6 +63,10 @@ export default function AddFood() {
   };
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Add A Item</title>
+      </Helmet>
       <div>
         <TitleForPages PageTitle="Add A Food Item" DeviderWidth="400px" />
       </div>
