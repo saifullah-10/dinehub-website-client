@@ -165,7 +165,7 @@ export default function AddFood() {
                     Quantity
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="quantity"
                     id="quantity"
                     className="bg-transparent border focus:outline-none border-[#FAA846] text-[#F8BD69] text-sm rounded-lg  focus:border-[#FAA846] block w-full p-2.5 "

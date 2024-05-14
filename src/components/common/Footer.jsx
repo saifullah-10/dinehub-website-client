@@ -2,6 +2,7 @@ import SiteLogo from "../../assets/common/res-logo.png";
 import { FaTwitter } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -46,34 +47,28 @@ export default function Footer() {
                   </span>
                   <ul className="list-unstyled">
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/presentation?ref=njs-profile"
-                      >
-                        Home
-                      </a>
+                      <Link to={"/"}>
+                        <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm">
+                          Home
+                        </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://blog.creative-tim.com?ref=njs-profile"
-                      >
-                        All Foods
-                      </a>
+                      <Link to={"/allfoods"}>
+                        <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm">
+                          All Foods
+                        </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.github.com/creativetimofficial?ref=njs-profile"
-                      >
-                        Gallery
-                      </a>
+                      <Link to={"/gallery"}>
+                        <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm">
+                          Gallery
+                        </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile"
-                      >
+                      <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm">
                         Contact Us
                       </a>
                     </li>

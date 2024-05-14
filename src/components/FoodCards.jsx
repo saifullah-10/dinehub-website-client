@@ -46,7 +46,7 @@ export default function FoodCards({ data, quantity = false }) {
           <div className="flex items-center justify-between">
             <span className="text-3xl font-bold ">${price} /pcs</span>
             <Link to={`/fooddetails/${_id}`}>
-              <button className=" bg-[#FA6E31] hover:text-[#CDC2B5] text-[#Fff] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <button className=" bg-[#FA6E31] hover:text-[#CDC2B5] text-[#Fff] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                 Details
               </button>
             </Link>

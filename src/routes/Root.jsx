@@ -12,7 +12,7 @@ export default function Root() {
   }
   return (
     <section
-      className=" max-w-[1440px] lg:w-[90%] w-[98%] mx-auto font-mont"
+      className=" max-w-[1920px] lg:w-[90%] w-[98%] mx-auto font-mont"
       style={{
         backgroundImage: `url(${Background})`,
         backgroundSize: "cover",

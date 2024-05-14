@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import TitleForPages from "../components/common/TitleForPages";
 import GalleryArticle from "../components/GalleryArticle";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/ContextProvide";
 import axios from "../util/axiosConfig";
 import { useQuery } from "@tanstack/react-query";
@@ -44,7 +44,9 @@ export default function Gallery() {
         .catch((e) => console.log(e));
     },
   });
-  console.log(data);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (isPending) {
     return <Loading />;
   }

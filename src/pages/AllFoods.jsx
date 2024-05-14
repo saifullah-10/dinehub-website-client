@@ -46,7 +46,7 @@ export default function AllFoods() {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [pagination]);
   if (isPending) {
     return <Loading />;
   }
