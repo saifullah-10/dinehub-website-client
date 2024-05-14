@@ -28,14 +28,29 @@ export default function Purchase() {
         .then((res) => res.data);
     },
   });
-  const { food_image, food_name, price } = data || {};
+  const { food_image, food_name, price, quantity: serverQuantity } = data || {};
 
   const { email, displayName } = user;
   const handlePurchase = (e) => {
     e.preventDefault();
+
     const quantity = e.target.quantity.value;
+    if (quantity > serverQuantity) {
+      swal({
+        title: "Stock Is Less Than From Your Order Quantity",
+
+        icon: "error",
+        button: "Ok",
+      });
+      return;
+    }
     if (!quantity) {
-      console.log(" must fill quantity");
+      swal({
+        title: "Quantity Required",
+
+        icon: "error",
+        button: "Ok",
+      });
       return;
     }
     const date = e.target.date.value;
@@ -89,7 +104,6 @@ export default function Purchase() {
       <TitleForPages DeviderWidth="250px" PageTitle="Purchase" />
       <div>
         {/* form */}
-
         <div className=" lg:flex items-center justify-center">
           <div className=" flex justify-end ">
             <img className=" rounded-2xl" src={food_image} alt="" />
@@ -360,6 +374,7 @@ export default function Purchase() {
             </Box>
           </Container>
         </div>
+
         {/* form */}
       </div>
     </div>

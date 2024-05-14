@@ -51,6 +51,8 @@ export default function Navbar(props) {
   const { user, setUser } = useContext(Context);
   const [open, setOpen] = useState(false);
 
+  const { displayName, photoURL } = user || {};
+
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -84,6 +86,8 @@ export default function Navbar(props) {
         console.log("something went wrong", err);
       });
   };
+  const [imgErr, setImgErr] = useState(false);
+
   return (
     <>
       <CssBaseline />
@@ -157,11 +161,17 @@ export default function Navbar(props) {
                 {/* profile */}
                 <div className={`${user ? "block" : "hidden"}`}>
                   <Box sx={{ m: "0", p: "0" }}>
-                    <Tooltip title="Open settings">
+                    <Tooltip title={displayName}>
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src="/static/images/avatar/2.jpg"
+                        {imgErr && <Avatar alt={displayName} src="xcv" />}
+                        <img
+                          className=" w-10 h-10  rounded-full"
+                          src={photoURL}
+                          alt="name"
+                          onError={(e) => {
+                            setImgErr(true);
+                            e.target.style.display = "none";
+                          }}
                         />
                       </IconButton>
                     </Tooltip>

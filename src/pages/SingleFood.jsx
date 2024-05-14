@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useEffect } from "react";
-
+import { useContext, useEffect } from "react";
+import { Context } from "../context/ContextProvide";
 import { Helmet } from "react-helmet";
 
 export default function SingleFood() {
   const { id } = useParams();
-
+  const { user } = useContext(Context);
+  const userUid = user?.uid;
   const { data, isPending } = useQuery({
     queryKey: ["fooddetails"],
     queryFn: async () => {
@@ -32,9 +33,12 @@ export default function SingleFood() {
     food_name,
     food_origin,
     price,
-
+    quantity,
+    uid,
     _id,
   } = data;
+  console.log(quantity);
+  const sameUser = uid === userUid ? true : false;
 
   return (
     <div>
@@ -55,11 +59,34 @@ export default function SingleFood() {
               </div>
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
-                  <Link to={`/purchase/${_id}`} className="w-full">
-                    <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]">
-                      Purchase
-                    </button>
-                  </Link>
+                  {sameUser || quantity === 0 ? (
+                    <div>
+                      <button
+                        className={`w-full cursor-not-allowed border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]`}
+                        disabled
+                      >
+                        Purchase
+                      </button>
+                      {sameUser ? (
+                        <p className=" my-3">
+                          Add By You, So You Can not Purchase
+                        </p>
+                      ) : (
+                        ""
+                      )}
+                      {quantity === 0 ? (
+                        <p className=" my-3">Out Of Stock</p>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  ) : (
+                    <Link to={`/purchase/${_id}`} className="w-full">
+                      <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]">
+                        Purchase
+                      </button>
+                    </Link>
+                  )}
                 </div>
                 <div className="w-1/2 px-2"></div>
               </div>
