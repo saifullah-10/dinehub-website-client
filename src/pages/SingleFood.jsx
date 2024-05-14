@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
@@ -13,9 +13,7 @@ export default function SingleFood() {
   const { data, isPending } = useQuery({
     queryKey: ["fooddetails"],
     queryFn: async () => {
-      return axios
-        .get(`http://localhost:3000/fooddetails/${id}`)
-        .then((res) => res.data);
+      return axios.get(`/fooddetails/${id}`).then((res) => res.data);
     },
   });
   useEffect(() => {

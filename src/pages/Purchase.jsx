@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import TitleForPages from "../components/common/TitleForPages";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import Loading from "../components/Loading";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
@@ -23,9 +23,7 @@ export default function Purchase() {
   const { data, isPending } = useQuery({
     queryKey: ["purchase"],
     queryFn: async () => {
-      return axios
-        .get(`http://localhost:3000/fooddetails/${id}`)
-        .then((res) => res.data);
+      return axios.get(`/fooddetails/${id}`).then((res) => res.data);
     },
   });
   const { food_image, food_name, price, quantity: serverQuantity } = data || {};
@@ -57,7 +55,7 @@ export default function Purchase() {
 
     axios
       .get(
-        `http://localhost:3000/purchase?id=${id}&quantity=${quantity}&uid=${user.uid}&date=${date}`
+        `/purchase?id=${id}&quantity=${quantity}&uid=${user.uid}&date=${date}`
       )
       .then((res) => {
         console.log(res.data);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import PropTypes from "prop-types";
 import swal from "sweetalert";
 
@@ -23,7 +23,7 @@ export default function TableRowPurchasePage({ data, refetch }) {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete(`http://localhost:3000/deleteorder/${orderId}`)
+          .delete(`/deleteorder/${orderId}`)
           .then((res) => {
             console.log(res);
             swal("Successfully Deleted", {

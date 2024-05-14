@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import TitleForPages from "../components/common/TitleForPages";
 import { Context } from "../context/ContextProvide";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet";
 
@@ -41,7 +41,7 @@ export default function AddFood() {
       count: 0,
     };
     axios
-      .post("http://localhost:3000/addFood", addData)
+      .post("/addFood", addData)
       .then((res) => {
         console.log(res);
         swal({

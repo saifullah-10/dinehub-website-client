@@ -20,19 +20,23 @@ import auth from "../util/firebase.config";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
 import swal from "sweetalert";
+import axios from "../util/axiosConfig";
 
 export default function SignIn() {
   const location = useLocation();
-  console.log(location);
+
   const { setRefresh } = useContext(Context);
+
   const navigate = useNavigate();
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        console.log(" sign In Success");
+      .then((userCredential) => {
+        const getUser = userCredential.user;
+        const jwtUid = getUser.uid;
+
         setRefresh((prev) => !prev);
         swal({
           title: "Successfully Login",
@@ -40,11 +44,16 @@ export default function SignIn() {
           icon: "success",
           button: "Ok",
         });
-        if (location?.state) {
-          navigate(location.state);
-        } else {
-          navigate("/");
-        }
+        // jwt
+        axios
+          .post("/jwt", { jwtUid }, { withCredentials: true })
+          .then((res) => console.log(res));
+        // jwt
+        // if (location?.state) {
+        //   navigate(location.state);
+        // } else {
+        //   navigate("/");
+        // }
       })
       .catch((err) => {
         console.log(err);

@@ -25,6 +25,7 @@ import { Context } from "../../context/ContextProvide";
 import { signOut } from "firebase/auth";
 import auth from "../../util/firebase.config";
 import swal from "sweetalert";
+import axios from "../../util/axiosConfig";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -64,27 +65,32 @@ export default function Navbar(props) {
   };
 
   const handleLogout = () => {
-    signOut(auth)
+    axios
+      .post("/logout")
       .then(() => {
-        swal({
-          title: "Successfully Logout",
+        signOut(auth)
+          .then(() => {
+            swal({
+              title: "Successfully Logout",
 
-          icon: "success",
-          button: "Ok",
-        });
-        navigate("/");
-        setUser(null);
-        console.log("User logged out");
+              icon: "success",
+              button: "Ok",
+            });
+            navigate("/");
+            setUser(null);
+            console.log("User logged out");
+          })
+          .catch((err) => {
+            swal({
+              title: "Something went wrong, Please try again",
+
+              icon: "error",
+              button: "Ok",
+            });
+            console.log("something went wrong", err);
+          });
       })
-      .catch((err) => {
-        swal({
-          title: "Something went wrong, Please try again",
-
-          icon: "error",
-          button: "Ok",
-        });
-        console.log("something went wrong", err);
-      });
+      .catch((e) => console.log(e));
   };
   const [imgErr, setImgErr] = useState(false);
 

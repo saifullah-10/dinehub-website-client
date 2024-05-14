@@ -1,23 +1,42 @@
 import { useQuery } from "@tanstack/react-query";
 import TitleForPages from "../components/common/TitleForPages";
 import TableRowAddPage from "../components/TableRowAddPage";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import Loading from "../components/Loading";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
 import { Helmet } from "react-helmet";
+import { signOut } from "firebase/auth";
+import auth from "../util/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 export default function MyAdded() {
+  const navigate = useNavigate();
   const {
     user: { uid },
+    setUser,
   } = useContext(Context);
 
   const { data, isPending, refetch } = useQuery({
     queryKey: ["myAdd"],
     queryFn: async () => {
       return axios
-        .get(`http://localhost:3000/myfoods/${uid}`)
-        .then((res) => res.data);
+        .get(`/myfoods/${uid}`)
+        .then((res) => res.data)
+        .catch((e) => {
+          axios
+            .post("/logout")
+            .then(() => {
+              signOut(auth)
+                .then(() => {
+                  setUser(null);
+                  navigate("/signin");
+                })
+                .catch((e) => console.log(e));
+            })
+            .catch((e) => console.log(e));
+          console.log(e.response.status);
+        });
     },
   });
 

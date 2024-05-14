@@ -10,7 +10,7 @@ import TitleForPages from "../components/common/TitleForPages";
 import GalleryArticle from "../components/GalleryArticle";
 import { useContext, useState } from "react";
 import { Context } from "../context/ContextProvide";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
 import swal from "sweetalert";
@@ -39,7 +39,7 @@ export default function Gallery() {
     queryKey: ["feedback"],
     queryFn: async () => {
       return axios
-        .get("http://localhost:3000/feedbackdata")
+        .get("/feedbackdata")
         .then((res) => res.data)
         .catch((e) => console.log(e));
     },
@@ -103,7 +103,7 @@ export default function Gallery() {
               user_feedback: feedback,
             };
             axios
-              .post("http://localhost:3000/feedback", feedbackData)
+              .post("/feedback", feedbackData)
               .then((res) => {
                 console.log(res);
                 swal({

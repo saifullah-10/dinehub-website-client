@@ -3,7 +3,7 @@ import HeroImg from "../assets/home/heroImg.png";
 import FoodCards from "../components/FoodCards";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/ContextProvide";
@@ -13,9 +13,7 @@ export default function Home() {
   const { data, isPending, refetch } = useQuery({
     queryKey: ["foodCards"],
     queryFn: async () => {
-      return axios
-        .get(`http://localhost:3000/homecard?elements=6`)
-        .then((res) => res.data);
+      return axios.get(`/homecard?elements=6`).then((res) => res.data);
     },
   });
   useEffect(() => {

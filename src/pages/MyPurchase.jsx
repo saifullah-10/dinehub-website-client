@@ -1,25 +1,44 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import Loading from "../components/Loading";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvide";
 import TitleForPages from "../components/common/TitleForPages";
 import TableRowPurchasePage from "../components/TableRowPurchasePage";
 import { Helmet } from "react-helmet";
+import { signOut } from "firebase/auth";
+import auth from "../util/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPurchase() {
+  const navigate = useNavigate();
   const {
     user: { uid },
+    setUser,
   } = useContext(Context);
   const { data, isPending, refetch } = useQuery({
     queryKey: ["myPurchase"],
     queryFn: async () => {
       return axios
-        .get(`http://localhost:3000/mypurchase/${uid}`)
-        .then((res) => res.data);
+        .get(`/mypurchase/${uid}`)
+        .then((res) => res.data)
+        .catch((e) => {
+          console.log(e);
+          axios
+            .post("/logout")
+            .then(() => {
+              signOut(auth)
+                .then(() => {
+                  setUser(null);
+                  navigate("/signin");
+                })
+                .catch((e) => console.log(e));
+            })
+            .catch((e) => console.log(e));
+        });
     },
   });
-  console.log(data);
+
   if (isPending) {
     return <Loading />;
   }

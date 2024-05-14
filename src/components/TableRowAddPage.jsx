@@ -9,7 +9,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Textarea } from "@mui/joy";
 import { Box } from "@mui/material";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import swal from "sweetalert";
 
 export default function TableRowAddPage({ data, refetch }) {
@@ -22,7 +22,7 @@ export default function TableRowAddPage({ data, refetch }) {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(data);
+
   const {
     food_image,
     food_name,
@@ -43,7 +43,7 @@ export default function TableRowAddPage({ data, refetch }) {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .post(`http://localhost:3000/deleteaddfood/${_id}`)
+          .post(`/deleteaddfood/${_id}`)
           .then((res) => {
             console.log(res);
             swal("Success! Your food has been deleted!", {
@@ -142,7 +142,7 @@ export default function TableRowAddPage({ data, refetch }) {
             }).then((willDelete) => {
               if (willDelete) {
                 axios
-                  .post(`http://localhost:3000/updatefoods/${_id}`, updateData)
+                  .post(`/updatefoods/${_id}`, updateData)
                   .then((res) => {
                     console.log(res);
                     swal("Update Successfully", {

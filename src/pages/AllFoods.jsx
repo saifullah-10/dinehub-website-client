@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import TitleForPages from "../components/common/TitleForPages";
-import axios from "axios";
+import axios from "../util/axiosConfig";
 import Loading from "../components/Loading";
 import FoodCards from "../components/FoodCards";
 import { useEffect, useState } from "react";
@@ -12,9 +12,7 @@ export default function AllFoods() {
   const { data: allData, isPending } = useQuery({
     queryKey: ["allFoods"],
     queryFn: async () => {
-      return axios
-        .get(`http://localhost:3000/allfoods`)
-        .then((res) => res.data);
+      return axios.get(`/allfoods`).then((res) => res.data);
     },
   });
   useEffect(() => {
@@ -24,9 +22,7 @@ export default function AllFoods() {
     e.preventDefault();
     const value = e.target.search.value;
 
-    axios
-      .get(`http://localhost:3000/foods/search?q=${value}`)
-      .then((res) => setData(res.data));
+    axios.get(`/foods/search?q=${value}`).then((res) => setData(res.data));
   };
   useEffect(() => {
     window.scrollTo(0, 0);
