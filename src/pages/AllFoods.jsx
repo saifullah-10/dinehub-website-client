@@ -5,16 +5,36 @@ import Loading from "../components/Loading";
 import FoodCards from "../components/FoodCards";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 export default function AllFoods() {
   const [data, setData] = useState(null);
+  const [pagination, setPagination] = useState(1);
 
-  const { data: allData, isPending } = useQuery({
-    queryKey: ["allFoods"],
+  const { data: totalData, isPending: pendingState } = useQuery({
+    queryKey: ["totalFoodsdata"],
     queryFn: async () => {
-      return axios.get(`/allfoods`).then((res) => res.data);
+      return axios
+        .get(`/totalDataCount`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
     },
   });
+
+  const {
+    data: allData,
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["allFoods"],
+    queryFn: async () => {
+      return axios.get(`/allfoods?page=${pagination}`).then((res) => res.data);
+    },
+  });
+  useEffect(() => {
+    refetch();
+  }, [pagination, refetch]);
   useEffect(() => {
     setData(allData);
   }, [allData]);
@@ -30,6 +50,9 @@ export default function AllFoods() {
   if (isPending) {
     return <Loading />;
   }
+  if (pendingState) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -42,7 +65,7 @@ export default function AllFoods() {
       <div>
         <form
           onSubmit={handleSearch}
-          className="mt-10 mx-auto max-w-xl py-2 px-6 lg:my-8 rounded-full  border-2 flex  border-[#F08425]"
+          className=" lg:mx-auto md:mx-auto mx-2 mb-4 max-w-xl  py-2 px-6 lg:my-8 rounded-full  border-2 flex  border-[#F08425]"
         >
           <input
             type="text"
@@ -58,6 +81,25 @@ export default function AllFoods() {
           {data?.map((data) => (
             <FoodCards key={data._id} data={data} quantity={true} />
           ))}
+        </div>
+        <div className=" flex my-2 justify-center">
+          <Stack>
+            <Pagination
+              count={Math.ceil(totalData?.count / 10)}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "#FFF",
+                },
+                "& .Mui-selected": {
+                  background: "#F08425",
+                },
+              }}
+              page={pagination}
+              onChange={(event, value) => {
+                setPagination(value);
+              }}
+            />
+          </Stack>
         </div>
       </div>
     </div>

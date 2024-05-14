@@ -47,13 +47,16 @@ export default function SignIn() {
         // jwt
         axios
           .post("/jwt", { jwtUid }, { withCredentials: true })
-          .then((res) => console.log(res));
+          .then((res) => {
+            console.log(res);
+            if (location?.state) {
+              navigate(location.state);
+            } else {
+              navigate("/");
+            }
+          })
+          .catch((err) => console.log(err));
         // jwt
-        // if (location?.state) {
-        //   navigate(location.state);
-        // } else {
-        //   navigate("/");
-        // }
       })
       .catch((err) => {
         console.log(err);
@@ -72,19 +75,34 @@ export default function SignIn() {
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
-      .then(() => {
-        swal({
-          title: "Successfully Login",
+      .then((userCredential) => {
+        const getUser = userCredential.user;
+        const jwtUid = getUser.uid;
+        axios
+          .post("/jwt", { jwtUid })
+          .then(() => {
+            setRefresh((prev) => !prev);
+            swal({
+              title: "Successfully Login",
 
-          icon: "success",
-          button: "Ok",
-        });
-        setRefresh((prev) => !prev);
-        if (location?.state) {
-          navigate(location.state);
-        } else {
-          navigate("/");
-        }
+              icon: "success",
+              button: "Ok",
+            });
+            if (location?.state) {
+              navigate(location.state);
+            } else {
+              navigate("/");
+            }
+          })
+          .catch((e) => {
+            swal({
+              title: "Something went wrong, Please try again",
+
+              icon: "error",
+              button: "Ok",
+            });
+            console.log(e);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -100,19 +118,34 @@ export default function SignIn() {
   const githubProvider = new GithubAuthProvider();
   const handleGithubLogin = () => {
     signInWithPopup(auth, githubProvider)
-      .then(() => {
-        swal({
-          title: "Successfully Login",
+      .then((userCredential) => {
+        const getUser = userCredential.user;
+        const jwtUid = getUser.uid;
+        axios
+          .post("/jwt", { jwtUid })
+          .then(() => {
+            setRefresh((prev) => !prev);
+            swal({
+              title: "Successfully Login",
 
-          icon: "success",
-          button: "Ok",
-        });
-        setRefresh((prev) => !prev);
-        if (location?.state) {
-          navigate(location.state);
-        } else {
-          navigate("/");
-        }
+              icon: "success",
+              button: "Ok",
+            });
+            if (location?.state) {
+              navigate(location.state);
+            } else {
+              navigate("/");
+            }
+          })
+          .catch((e) => {
+            swal({
+              title: "Something went wrong, Please try again",
+
+              icon: "error",
+              button: "Ok",
+            });
+            console.log(e);
+          });
       })
       .catch((err) => {
         console.log(err);
