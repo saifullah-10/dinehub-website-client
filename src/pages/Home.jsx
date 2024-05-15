@@ -8,6 +8,8 @@ import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/ContextProvide";
 import { Helmet } from "react-helmet";
+import ContactUs from "../components/ContactUs";
+import Blogs from "../components/Blogs";
 export default function Home() {
   const { user } = useContext(Context);
   const { data, isPending, refetch } = useQuery({
@@ -91,6 +93,43 @@ export default function Home() {
         </div>
       </div>
       {/* top selling */}
+      <div>
+        <div className=" lg:ml-5 md:ml-5 md:py-6 py-5 lg:py-8 flex flex-col items-center lg:items-start">
+          <h1 className="max-w-2xl lg:mb-4 mb-3 text-3xl font-extrabold tracking-tight leading-none text-center lg:text-left md:text-4xl xl:text-5xl text-white">
+            Blogs
+          </h1>
+          <Divider
+            sx={{
+              width: "100px",
+              height: "5px",
+              background: "#F97942",
+              borderRadius: "5px",
+            }}
+          />
+        </div>
+        <div>
+          <Blogs />
+        </div>
+      </div>
+      {/* contact */}
+      <div>
+        <div className=" lg:ml-5 md:ml-5 md:py-6 py-5 lg:py-8 flex flex-col items-center lg:items-start">
+          <h1 className="max-w-2xl lg:mb-4 mb-3 text-3xl font-extrabold tracking-tight leading-none text-center lg:text-left md:text-4xl xl:text-5xl text-white">
+            Contact Us
+          </h1>
+          <Divider
+            sx={{
+              width: "200px",
+              height: "5px",
+              background: "#F97942",
+              borderRadius: "5px",
+            }}
+          />
+        </div>
+        <div>
+          <ContactUs />
+        </div>
+      </div>
     </>
   );
 }
