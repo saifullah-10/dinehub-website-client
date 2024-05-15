@@ -1,8 +1,14 @@
-# React + Vite
+Website Name: DineHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website URL: https://restaurant-ass-11.web.app
 
-Currently, two official plugins are available:
+Main Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- You can sell your own food items
+- You can update and delete your food items
+- You can purchase a food item
+- You can delete a food item that you have been already purchased
+- You can find food items using search functionality
+- You can add your feedback for your purchased food item
+
+This is a modern restaurant management website that make a new identity for your restaurant business.
