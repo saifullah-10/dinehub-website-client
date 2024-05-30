@@ -13,7 +13,7 @@ Main Features:
 
 Add New Features In 5/30/2024
 
-Component name for Payment feature: SetMenu.jsx
+Component name for Set Menu feature: SetMenu.jsx
 
 - Add a set menu page
 - Now you can order your desire set food items
