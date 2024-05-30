@@ -19,11 +19,18 @@ import { Helmet } from "react-helmet";
 export default function Purchase() {
   const { user } = useContext(Context);
   const { id } = useParams();
+  const searchId = id.split(" ");
 
   const { data, isPending } = useQuery({
     queryKey: ["purchase"],
     queryFn: async () => {
-      return axios.get(`/fooddetails/${id}`).then((res) => res.data);
+      return axios
+        .get(
+          searchId[1] === "singlefood"
+            ? `/purchasefood/${searchId[0]}`
+            : `/selectedmenu/${id}`
+        )
+        .then((res) => res.data);
     },
   });
   const { food_image, food_name, price, quantity: serverQuantity } = data || {};
@@ -55,7 +62,9 @@ export default function Purchase() {
 
     axios
       .get(
-        `/purchase?id=${id}&quantity=${quantity}&uid=${user.uid}&date=${date}`
+        searchId[1] === "singlefood"
+          ? `/purchase?id=${searchId[0]}&quantity=${quantity}&uid=${user.uid}&date=${date}`
+          : `/setmenuupdate?id=${id}&quantity=${quantity}&uid=${user.uid}&date=${date}`
       )
       .then((res) => {
         console.log(res.data);

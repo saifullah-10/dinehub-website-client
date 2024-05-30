@@ -150,6 +150,19 @@ export default function Navbar(props) {
                       Gallery
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink
+                      to={"/setmenu"}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block py-2 px-3 text-white  rounded md:bg-transparent md:text-[#F28B30] md:p-0"
+                          : "block py-2 px-3 text-white  rounded md:bg-transparent  md:p-0"
+                      }
+                      aria-current="page"
+                    >
+                      Set Menu
+                    </NavLink>
+                  </li>
                 </ul>
               </div>
 

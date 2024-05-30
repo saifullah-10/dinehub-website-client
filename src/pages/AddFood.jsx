@@ -28,6 +28,15 @@ export default function AddFood() {
       });
       return;
     }
+    if (quantity <= 0) {
+      swal({
+        title: "Quantity must be greater than zero",
+
+        icon: "error",
+        button: "Ok",
+      });
+      return;
+    }
     const addData = {
       food_name: name,
       food_image: photo,

@@ -79,7 +79,7 @@ export default function SingleFood() {
                       )}
                     </div>
                   ) : (
-                    <Link to={`/purchase/${_id}`} className="w-full">
+                    <Link to={`/purchase/${_id} singlefood`} className="w-full">
                       <button className="w-full border-2 border-[#FA6E31] py-2 px-4 rounded-full font-bold hover:text-[#F78656]">
                         Purchase
                       </button>

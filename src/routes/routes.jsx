@@ -11,8 +11,9 @@ import SingleFood from "../pages/SingleFood";
 import PrivateRoute from "./PrivateRoute";
 import AddFood from "../pages/AddFood";
 import MyAdded from "../pages/MyAdded";
-import MyPurcchase from "../pages/MyPurchase";
+import MyPurchase from "../pages/MyPurchase";
 import Gallery from "../pages/Gallery";
+import SetMenu from "../pages/SetMenu";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         element: <Gallery />,
       },
       {
+        path: "/setmenu",
+        element: <SetMenu />,
+      },
+      {
         path: "/purchase/:id",
         element: (
           <PrivateRoute>
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
         path: "/mypurchase",
         element: (
           <PrivateRoute>
-            <MyPurcchase />
+            <MyPurchase />
           </PrivateRoute>
         ),
       },
