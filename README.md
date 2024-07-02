@@ -19,4 +19,10 @@ Component name for Set Menu feature: SetMenu.jsx
 - Now you can order your desire set food items
 - You can order food items and delete food items
 
+How to setup project locally:
+- Clone this repository
+- Install npm
+- Install and login firebase
+- Npm run dev in your terminal
+
 This is a modern restaurant management website that make a new identity for your restaurant business.
